@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ui0_style.css">
+    <script src="ui0_code.js"></script>
+    <title>Register 2</title>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbarLeft">
+        <a href="homepage.html">Home</a>
+        <a href="ui0.html">Board</a>
+        <a href="about.html">About</a>
+    </div>
+    <div class="navbarCenter">
+        <img src="Source/logo.png" alt="Logo">
+    </div>
+    <div class="navbarRight">
+        <a href="authentication.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </div>
+</div>
+<div id="signupBox">
+    <div>
+        <p id="authBoxText1">Ο λογαριασμός σου δημιουργήθηκε επιτυχώς!</p>
+        <p id="authBoxText2">Συμπλήρωσε τα στοιχεία φοίτησης σου παρακάτω</p>
+        <p id="authBoxText3">(1/2)</p>
+    </div>
+    <form id="studentInfoBox" method="post">
+        <label for="surname">Επώνυμο φοιτητή:</label>
+        <label for="surname" id="surnameLabel">Το επώνυμο απαιτείται για τον διαχωρισμό σε τμήματα. Μπορείς να
+            υποβάλλεις μόνο τους 3 πρώτους χαρακτήρες του επωνύμου σου.</label>
+        <label for="surname" id="greekCheck" style="display: none">Μόνο ελληνικοί χαρακτήρες</label>
+        <input type="text" id="surname" name="surname" min="1" step="1" oninput="checkSurname(), displayButton2()" required>
+        <label for="term">Εξάμηνο Σπουδών</label>
+        <label id="termCheck" for="term" style="display: none">Επιλέξτε το σωστό εξάμηνο</label>
+        <input type="number" id="term" name="term" oninput="checkTerm(), displayButton2()" required>
+        <label for="course">Κύκλος Σπουδών:</label>
+        <select id="course" name="course" oninput="displayButton2()" required>
+            <option value="0">Κανένας</option>
+            <option value="1">Α: Ενέργεια</option>
+            <option value="2">Β: Επικοινωνιών & Δικτύων</option>
+            <option value="3">Γ: Ηλεκτρονικής & Υπολογιστικών Συστημάτων</option>
+        </select>
+        <input type="hidden" name="session_token" value="<?php echo $sessionToken; ?>">
+        <button type="submit" id="signupContinue2" style="display: none">Συνέχεια</button>
+    </form>
+</div>
+</body>
+</html>

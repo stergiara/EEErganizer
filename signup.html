@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ui0_style.css">
+    <script src="ui0_code.js"></script>
+    <title>Register</title>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbarLeft">
+        <a href="homepage.html">Home</a>
+        <a href="ui0.html">Board</a>
+        <a href="about.html">About</a>
+    </div>
+    <div class="navbarCenter">
+        <img src="Source/logo.png" alt="Logo">
+    </div>
+    <div class="navbarRight">
+        <a href="authentication.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </div>
+</div>
+<div id="signupBox">
+    <div>
+        <p id="authBoxText1">Κάνε εγγραφή στο EEErganizer!</p>
+        <p id="authBoxText3">Συμπλήρωσε τα στοιχεία σου παρακάτω</p>
+    </div>
+    <form id="signupBoxForm" action="signup.php" method="post">
+        <label for="username">Όνομα χρήστη:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <label for="email" id="emailExists">Το παρακάτω email χρησιμοποιείται ήδη</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="password">Κωδικός χρήστη:</label>
+        <label for="password" id="strengthText"></label>
+        <label for="password" id="minCharacters">Τουλάχιστον 8 χαρακτήρες</label>
+        <label id="capsWarning">Το CAPS LOCK έιναι ενεργοποιημένο</label>
+        <input type="password" id="password" name="password" oninput="checkPasswordStrength()" required>
+
+        <label for="passwordCheck">Ξανά πληκτρολόγησε τον κώδικου σου:</label>
+        <label for="passwordCheck" id="noMatch"></label>
+        <input type="password" id="passwordCheck" name="passwordCheck" oninput="checkPasswordMatch()" required>
+
+        <label for="gtpr" id="gtprLabel">
+            Αποδέχομαι τους όρους και τις προϋποθέσεις για την χρήση των προσωπικών μου στοιχείων.
+        </label>
+        <input type="checkbox" id="gtpr" class="gtprInput" oninput="checkboxCheck(), displayButton()">
+        <button type="submit" id="signupContinue" style="display: none" onclick="submitForm()">Εγγραφή</button>
+    </form>
+</div>
+</body>
+</html>

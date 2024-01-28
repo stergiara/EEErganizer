@@ -1,5 +1,4 @@
 
-/*
 label {
     display: inline-block;
     margin: 5px;
@@ -66,7 +65,6 @@ label {
 .btn:hover::after{
     color: white;
 }
- */
 
 .clickable-table{
     border: 15px solid #474747;
@@ -416,7 +414,6 @@ body {
     border: 5px solid white;
     margin-top: 150px;
     margin-left: -250px;
-
 }
 
 #authBoxText1 {
@@ -428,6 +425,14 @@ body {
 }
 
 #authBoxText2 {
+
+    text-align: center;
+    font-family: Tahoma, serif;
+    color: white;
+    font-size: 16px;
+}
+
+#authBoxText3 {
 
     text-align: center;
     font-family: Tahoma, serif;
@@ -457,6 +462,13 @@ input {
     color: white;
     font-size: 16px;
     font-family: Tahoma, serif;
+}
+
+#capsWarning{
+
+    font-family: Tahoma, serif;
+    color: #C8E6E7;
+    font-size: 10px;
 }
 
 #authBoxButton {
@@ -501,4 +513,201 @@ input {
 
     text-decoration: underline;
     transition: 200ms;
+}
+
+/* sign up*/
+
+#signupBox {
+
+    vertical-align: center;
+    background-color: #474747;
+    width:400px;
+    height: 810px;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    padding: 50px;
+    border: 5px solid white;
+    margin-top: 150px;
+    margin-left: -250px;
+}
+
+#emailExists {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: indianred;
+}
+
+#minCharacters {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: indianred;
+}
+
+.weak {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: lightcoral;
+}
+
+.medium {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: darkkhaki;
+}
+
+.strong {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: lightgreen;
+}
+
+#noMatch {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: lightcoral;
+}
+
+/* Style the custom gtpr button */
+.gtprInput {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+}
+
+/* Style the gtpr label text */
+#gtprLabel {
+    font-family: Tahoma, serif;
+    font-size: 11px;
+    color: white;
+}
+
+/* Style the checked state of the custom gtpr button */
+.gtprInput:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+/* Style the checked state of the gtpr label text */
+.gtprInput:checked + #gtprLabel {
+    color: #4CAF50;
+}
+
+#signupContinue {
+
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background: #C8E6E7;
+    color: black;
+    vertical-align: middle;
+    font-family: Tahoma, serif;
+    font-size: 14px;
+    padding: 10px 40px;
+}
+
+#signupContinue:hover {
+
+    background: #406F70;
+    color: white;
+    transition: 200ms;
+}
+
+#integerOnly {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: lightcoral;
+}
+
+#surnameLabel {
+
+    font-family: Tahoma, serif;
+    color: #C8E6E7;
+    font-size: 10px;
+}
+
+select {
+
+    display: block;
+    margin-bottom: 50px;
+    border-color: white;
+    background-color: #2B2B2B;
+    font-size: 16px;
+    color: white;
+    width: 100%;
+    padding: 8px;
+}
+
+select option {
+
+    display: block;
+    margin-bottom: 10px;
+    font-family: Tahoma, serif;
+    color: white;
+    margin: 10px;
+}
+
+#termCheck {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: indianred;
+}
+
+#greekCheck {
+
+    font-family: Tahoma, serif;
+    font-size: 10px;
+    color: indianred;
+}
+
+#signupContinue2 {
+
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background: #C8E6E7;
+    color: black;
+    vertical-align: middle;
+    font-family: Tahoma, serif;
+    font-size: 14px;
+    padding: 10px 40px;
+}
+
+#signupContinue2:hover {
+
+    background: #406F70;
+    color: white;
+    transition: 200ms;
+}
+
+.gradeInput {
+
+    display: block;
+    width: 90%;
+    padding: 8px;
+    margin: 0;
+    background-color: #474747;
+    color: white;
+    font-size: 16px;
+    font-family: Tahoma, serif;
 }
