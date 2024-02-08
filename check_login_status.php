@@ -11,3 +11,4 @@ function isLoggedIn() {
 // Output the login status as a JSON response
 echo json_encode(['isLoggedIn' => isLoggedIn()]);
 ?>
+

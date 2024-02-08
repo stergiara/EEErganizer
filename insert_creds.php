@@ -66,7 +66,7 @@ if (isset($_SESSION['session_token'])) {
 
         if (mysqli_stmt_affected_rows($stmt) > 0) {
             session_start();
-            header('Location: http://localhost/homepage.html');
+            header('Location: http://localhost/signup_3.html');
             exit();
         } else {
             echo "Failed to update data: " . mysqli_error($conn);

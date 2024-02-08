@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var loginLink = document.getElementById("loginLink");
     var signupLink = document.getElementById("signupLink");
 
-    // Function to update login status
     function updateLoginStatus() {
         var xhr = new XMLHttpRequest();
 
@@ -13,17 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 var response = JSON.parse(xhr.responseText);
 
                 if (response.isLoggedIn) {
-                    // User is logged in
                     loginLink.textContent = "Account";
                     signupLink.textContent = "Log Out";
-                    loginLink.href = "account.html";  // Update href accordingly
-                    signupLink.href = "#"; // Update href accordingly
+                    loginLink.href = "account.html";
+                    signupLink.href = "#";
+                    document.getElementById('notLoggedHomepage').style.display = 'none';
                 } else {
-                    // User is not logged in
                     loginLink.textContent = "Login";
                     signupLink.textContent = "Sign Up";
-                    loginLink.href = "login.html";
+                    loginLink.href = "authentication.html";
                     signupLink.href = "signup.html";
+                    document.getElementById('notLoggedHomepage').style.display = 'block';
                 }
             }
         };
@@ -35,11 +34,45 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.send();
     }
 
-    // Initial update on page load
     updateLoginStatus();
+
 });
 
+function logoutClicked() {
+    var xhr = new XMLHttpRequest();
 
+    xhr.open("GET", "check_login_status.php", true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.isLoggedIn) {
+                var confirmLogout = confirm("Are you sure you want to log out?");
+
+                if (confirmLogout) {
+                    var logoutXhr = new XMLHttpRequest();
+
+                    logoutXhr.open("GET", "logout.php", true);
+
+                    logoutXhr.onreadystatechange = function () {
+                        if (logoutXhr.readyState === 4 && logoutXhr.status === 200) {
+                            loginLink.textContent = "Login";
+                            signupLink.textContent = "Sign Up";
+                            loginLink.href = "authentication.html";
+                            signupLink.href = "signup.html";
+
+                        }
+                    };
+
+                    logoutXhr.send();
+                }
+            }
+        }
+    };
+
+    xhr.send();
+}
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -80,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.classList.remove("picked");
             }
 
-            // Display the updated totals and row count in the footer
             totalHoursElement.textContent = "Σύνολο ωρών: " + totalHours;
             labHoursElement.textContent = "Εργαστηριακές ώρες: " + totalLabHours;
             subjectCountElement.textContent = "Σύνολο μαθημάτων: " + subjectCount;
@@ -121,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 let mlchck = false;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -129,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var emailExists = document.getElementById("emailExists");
 
     emailInput.addEventListener("blur", function () {
-        var email = this.value.trim();  // Trim whitespace from the email
+        var email = this.value.trim();
 
         if (email !== "") {
             checkEmailExists(email);
@@ -151,31 +182,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (response === "exists") {
                         mlchck = true;
                         emailExists.style.display = "block";
-                        // You can handle what happens next, like preventing form submission.
                     } else if (response === "not_exists") {
                         mlchck = false;
                         emailExists.style.display = "none";
-                        // You can perform additional actions here if needed
                     } else {
-                        // Handle other responses or errors
                         console.error("Error: " + response);
                     }
                 } else {
-                    // Handle HTTP errors
                     console.error("HTTP error: " + xhr.status);
                 }
             }
         };
 
-        // Encode the data
         var data = "email=" + encodeURIComponent(email);
 
-        // Handle network errors
         xhr.onerror = function () {
             console.error("Network error");
         };
 
-        // Send the request
         xhr.send(data);
     }
 });
@@ -206,14 +230,12 @@ function checkPasswordStrength() {
     var strengthText = document.getElementById('strengthText');
     var minCharacters = document.getElementById('minCharacters')
 
-    // Initialize points and criteria
     var points = 0;
     var minLength = 8;
     var minUppercase = 1;
     var minNumbers = 1;
     var minSpecialChars = 1;
 
-    // Check password length
     if (password.length >= minLength) {
         points += 20;
         minCharacters.style.display = "none";
@@ -223,25 +245,21 @@ function checkPasswordStrength() {
         pswstr = false;
     }
 
-    // Check for uppercase letters
     var uppercaseRegex = /[A-Z]/;
     if (password.match(uppercaseRegex) && password.match(uppercaseRegex).length >= minUppercase) {
         points += 2;
     }
 
-    // Check for numbers
     var numbersRegex = /\d/;
     if (password.match(numbersRegex) && password.match(numbersRegex).length >= minNumbers) {
         points += 2;
     }
 
-    // Check for special characters
     var specialCharsRegex = /[!@#$%^&*(),.?":{}|<>]/;
     if (password.match(specialCharsRegex) && password.match(specialCharsRegex).length >= minSpecialChars) {
         points += 2;
     }
 
-    // Determine strength based on points
     if (points >= 26) {
         strengthText.textContent = 'Ισχυρός';
         strengthText.className = 'strong';
@@ -352,7 +370,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.classList.add("picked");
                 subjectCount2++;
 
-                // Show the input element in the picked row
                 if (inputElement) {
                     inputElement.style.display = "block";
                 }
@@ -360,7 +377,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 row.classList.remove("picked");
                 subjectCount2--;
 
-                // Hide the input element in the unpicked row
                 if (inputElement) {
                     inputElement.style.display = "none";
                 }
@@ -376,13 +392,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var insertButton = document.getElementById("checkList");
 
     insertButton.addEventListener("click", function () {
-        insertDataIntoDatabase(3); // Assuming you want to insert data from column 3
+        insertDataIntoDatabase(3);
     });
 
     function insertDataIntoDatabase(columnIndex) {
         var rows = table.rows;
         var data = [];
-        var invalidGrade = false; // Flag to track if any grade is invalid
+        var invalidGrade = false;
 
         function extractNumericPart(str) {
             var matches = str.match(/(\d+)/g);
@@ -397,32 +413,27 @@ document.addEventListener("DOMContentLoaded", function () {
             if (inputElement) {
                 var inputValue = inputElement.value.trim();
 
-                // Check if the input is not empty and is a valid number
                 if (inputValue !== '' && !isNaN(inputValue)) {
                     var value = parseFloat(inputValue);
 
                     if (value < 5 || value > 10) {
-                        // Set the flag to true if any grade is invalid
                         invalidGrade = true;
-                        break; // Exit the loop early since there's no need to check further
+                        break;
                     }
 
                     data.push({ code: extractNumericPart(cell0.textContent), value: value });
                 } else {
-                    // Log NaN values but don't set the flag
                     console.log("NaN value encountered for row", i + 1);
                 }
             }
         }
 
         if (invalidGrade) {
-            alert("Επίλεξε μόνο τα μαθήματα που έχεις περάσει");
-            return; // Exit the function without proceeding to data insertion
+            alert("Επίλεξε μόνο τα μαθήματα που έχεις περάσει.");
+            return;
         }
 
 
-        // Continue only if all grades are valid
-        // Add session_token to the data
         data.push({ session_token: "<?php echo $sessionToken; ?>" });
 
         console.log("Session Token:", "<?php echo $sessionToken; ?>"); // Add this line for debugging
@@ -451,7 +462,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("studentInfoBox");
 
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault();
 
         // Create FormData object from the form
         var formData = new FormData(form);
@@ -463,7 +474,6 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 window.location.href = 'signup_3.html';
-                // You can redirect or perform other actions after successful insertion
             } else {
                 console.error("Failed to insert data:", xhr.statusText);
             }
@@ -473,40 +483,136 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// charts.js
+document.addEventListener("DOMContentLoaded", function () {
+    var table = document.getElementById("tableId");
+    console.log("test");
 
-// Load the Google Charts library
+    // Function to highlight table cells containing integers
+    function highlightTableCells(integerColumns) {
+        var rows = table.rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].cells;
+
+            for (var j = 0; j < cells.length; j++) {
+                var columnName = cells[j].getAttribute('data-column');
+                if (integerColumns[columnName]) {
+                    var cellValue = cells[j].textContent.trim();
+                    if (!isNaN(cellValue)) {
+                        var value = parseFloat(cellValue);
+                        if (value >= 5 && value <= 10) {
+                            cells[j].classList.add("highlighted-cell");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Function to fetch class data from the database
+    function fetchDataFromDatabase() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "fetch_data.php", true); // Adjust the URL to your PHP script
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var integerColumns = JSON.parse(xhr.responseText);
+                highlightTableCells(integerColumns);
+            } else {
+                console.error(`Failed to fetch data: ${xhr.statusText}`);
+            }
+        };
+
+        xhr.send(JSON.stringify({ sessionToken: session_token }));
+    }
+
+    // Call the function to fetch data from the database and highlight cells
+    fetchDataFromDatabase();
+});
+
 google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-// Set callback function when the library is loaded
-google.charts.setOnLoadCallback(drawVisualization);
+function drawChart() {
+    // Make an AJAX request to fetch i values
+    fetch('graph_data.php')
+        .then(response => response.json())
+        .then(data => {
+            // Extract i values from the fetched data
+            var i1 = data.i1;
+            var i2 = data.i2;
+            var i3 = data.i3;
+            var i4 = data.i4;
+            var i5 = data.i5;
+            var i6 = data.i6;
+            var i7 = data.i7;
+            var i8 = data.i8;
+            var i9 = data.i9;
 
-// Function to draw the visualization
-function drawVisualization() {
-    // Some raw data (not necessarily accurate)
-    var data = google.visualization.arrayToDataTable([
-        ['Εξάμηνο', 'Μαθήματα'],
-        ['1o', 4],
-        ['2o', 5],
-        ['3o', 3],
-        ['4o', 8],
-        ['5o', 4],
-        ['1o', 4],
-        ['2o', 5],
-        ['3o', 3],
-        ['4o', 8],
-        ['5o', 4]
-    ]);
+            // Create data table for the chart
+            var chartData = new google.visualization.DataTable();
+            chartData.addColumn('string', 'Category');
+            chartData.addColumn('number', 'Μαθήματα');
 
-    var options = {
-        title : 'Monthly Coffee Production by Country',
-        vAxis: {title: 'Cups'},
-        hAxis: {title: 'Month'},
-        seriesType: 'bars',
-        series: {1: {type: 'line'}},
-        backgroundColor: '#2B2B2B'
-    };
+            // Add rows with i values
+            chartData.addRows([
+                ['1ο', i1],
+                ['2ο', i2],
+                ['3ο', i3],
+                ['4ο', i4],
+                ['5ο', i5],
+                ['6ο', i6],
+                ['7ο', i7],
+                ['8ο', i8],
+                ['9ο', i9]
+            ]);
 
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
+            // Chart options
+            var options = {
+                title: 'Περασμένα μαθήματα ανά εξάμηνο',
+                seriesType: 'bars',
+                vAxis: {
+                    viewWindow: {
+                        min: 0,
+                        max: 6
+                    }
+                },
+                backgroundColor: '#2B2B2B',  // Background color
+                colors: ['#406F70'],       // Bar color (you can specify an array for multiple series)
+                legend: {textStyle: {color: '#FFFFFF'}},  // Legend text color
+                titleTextStyle: {color: '#FFFFFF'},        // Title text color
+                hAxis: {textStyle: {color: '#FFFFFF'}},    // Horizontal axis text color
+                vAxis: {textStyle: {color: '#FFFFFF'}}     // Vertical axis text color
+            };
+
+            // Create and draw the chart
+            var chart = new google.visualization.ComboChart(document.getElementById('chartContainer'));
+            chart.draw(chartData, options);
+        })
+        .catch(error => console.error('Error fetching data:', error));
 }
+
+// jQuery document ready function
+$(document).ready(function () {
+    // Fetch login status using AJAX
+    $.ajax({
+        url: 'check_login_status.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            // Check if the user is logged in
+            if (response.isLoggedIn) {
+                // If logged in, hide the div
+                $('#notLoggedHomepage').hide();
+            } else {
+                // If not logged in, do nothing or show the div (optional)
+                // $('#myDiv').show();
+            }
+        },
+        error: function () {
+            console.error('Error fetching login status.');
+        }
+    });
+});
+

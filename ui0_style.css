@@ -711,3 +711,9 @@ select option {
     font-size: 16px;
     font-family: Tahoma, serif;
 }
+
+.highlighted-cell {
+
+    background-color: indianred;
+    color: indianred;
+}
